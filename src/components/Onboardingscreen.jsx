@@ -6,14 +6,21 @@ import { useNavigate } from 'react-router-dom';
 
 const OnboardingScreen = () => {
   const navigate = useNavigate();
+
+  // we have 2 states, l loading and other loaded 
+  // we set the laoading to the true
+  // and we set the loaded to false initially 
   const [loading, setLoading] = useState(true);
   const [loaded, setLoaded] = useState(false);
 
+
+// we set the useEffect to setLoading to false and setLoaded to true and this hapens all in 1000 sec
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
       setLoaded(true);
     }, 1000);
+    
     return () => clearTimeout(timer);
   }, []);
 

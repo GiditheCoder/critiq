@@ -13,10 +13,10 @@ const HomeScreen = () => {
   return (
     <div className="flex ">
       {/* Sidebar */}
-      <Modal className="z-50 "  />
+      <Modal className="z-50 p-13 "  />
 
       {/* Main content with left padding to accommodate the sidebar */}
-      <div className="flex-1 pl-16 ">
+      <div className="flex-1 pl-20  ">
         <Header />
         <Hero />
         <FeaturedArtiste />

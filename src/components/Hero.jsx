@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import critiqHome from '../images/critiq-homepage.jpg';
-import { useNavigate } from 'react-router-dom'
-import topChart from '../images/topchart.png';
-import musicNote from '../images/musicnote.png';
-import notificationIcon from '../images/notificationIcon.png';
-import playIcon from '../images/playIcon.png';
-import searchIcon from '../images/searchIcon.png';
-import swipeIcon from '../images/swipeicon.png';
-
-
-
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
-
   const navigate = useNavigate();
 
-  const handleSignRoute = ()=>{
-      navigate('/signup')
-  }
+  const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      setLoaded(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleSignRoute = () => {
+    navigate('/signup');
+  };
 
   return (
     <div
@@ -28,24 +31,67 @@ const Hero = () => {
       }}
       onClick={handleSignRoute}
     >
-      <div className="px-36 text-white ">
-        <h1 className=" w-full text-[96px] font-bold mb-4 ">
-          Power in your hands
-        </h1>
-        <p className="text-[32px]  mb-6 font-light">
-          You decide the spotlight. <br />
-          Stream. Vote
-        </p>
+      <div className="px-10 sm:px-20 md:px-36 text-white">
+        {/* Heading */}
+        {loading ? (
+          <Skeleton
+            height={80}
+            width={400}
+            baseColor="#A259FF"
+            highlightColor="#E2CCFF"
+            style={{ opacity: 0.2, marginBottom: '1rem' }}
+          />
+        ) : (
+          <h1
+            className={`text-[40px] sm:text-[64px] md:text-[96px] font-bold mb-4 transition-opacity duration-700 ease-in-out ${
+              loaded ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            Power in your hands
+          </h1>
+        )}
 
-        {/* button */}
-        <button className="bg-[#A259FF] hover:bg-[#E2CCFF] text-white  text-[20px]  hover:text-[#A259FF] font-semibold py-3 px-18 rounded-full transition duration-300">
-          Get Started
-        </button>
+        {/* Subtext */}
+        {loading ? (
+          <Skeleton
+            height={40}
+            width={300}
+            baseColor="#A259FF"
+            highlightColor="#E2CCFF"
+            style={{ opacity: 0.2, marginBottom: '1.5rem' }}
+          />
+        ) : (
+          <p
+            className={`text-[20px] sm:text-[28px] md:text-[32px] mb-6 font-light transition-opacity duration-700 ease-in-out ${
+              loaded ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            You decide the spotlight. <br />
+            Stream. Vote
+          </p>
+        )}
 
+        {/* Button */}
+        {loading ? (
+          <Skeleton
+            height={50}
+            width={180}
+            baseColor="#A259FF"
+            highlightColor="#E2CCFF"
+            style={{ opacity: 0.2, borderRadius: '9999px' }}
+          />
+        ) : (
+          <button
+            className={`bg-[#A259FF] hover:bg-[#E2CCFF] text-white hover:text-[#A259FF] text-[18px] md:text-[20px] font-semibold py-3 px-10 rounded-full  duration-300 transition-opacity ${
+              loaded ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            Get Started
+          </button>
+        )}
       </div>
     </div>
   );
 };
 
 export default Hero;
-
