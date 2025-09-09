@@ -50,38 +50,81 @@ const Genre = () => {
         )}
       </div>
 
-      {/* Genre Grid */}
-      <div className="grid grid-cols-3 gap-4">
-        {loading
-          ? Array(6)
-              .fill()
-              .map((_, i) => (
-                <Skeleton
-                  key={i}
-                  height={160}
-                  baseColor="#A259FF"
-                  highlightColor="#E2CCFF"
-                  style={{ borderRadius: '0.5rem', opacity: 0.2 }}
-                />
-              ))
-          : genres.map((genre, index) => (
-              <div
-                key={index}
-                className={`relative rounded-md overflow-hidden h-40 transition-opacity duration-700 ${loaded ? 'opacity-100' : 'opacity-0'}`}
-              >
-                <img
-                  src={genre.image}
-                  alt={genre.name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                  <span className="text-lg font-bold">{genre.name}</span>
-                </div>
+      {/* Genre Custom Grid */}
+      <div className="grid grid-cols-4 grid-rows-2 gap-4">
+        {loading ? (
+          Array(6)
+            .fill()
+            .map((_, i) => (
+              <Skeleton
+                key={i}
+                height={160}
+                baseColor="#A259FF"
+                highlightColor="#E2CCFF"
+                style={{ borderRadius: '0.5rem', opacity: 0.2 }}
+              />
+            ))
+        ) : (
+          <>
+            {/* Rock */}
+            <div className="col-span-1 row-span-2 relative rounded-md overflow-hidden">
+              <img src={genres[0].image} alt={genres[0].name} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-opacity-30 flex items-center justify-center">
+         
               </div>
-            ))}
+            </div>
+
+            {/* R&B */}
+            <div className="col-span-1 row-span-1 relative rounded-md overflow-hidden">
+              <img src={genres[1].image} alt={genres[1].name} className="w-full h-full object-cover" />
+              <div className="absolute inset-0  bg-opacity-30 flex items-center justify-center">
+            
+              </div>
+            </div>
+
+            {/* Pop */}
+            <div className="col-span-1 row-span-1 relative overflow-hidden">
+              <img src={genres[2].image} alt={genres[2].name} className="w-full h-full object-cover" />
+              <div className="absolute inset-0  bg-opacity-30 flex items-center justify-center">
+           
+              </div>
+            </div>
+
+            {/* Reggae */}
+
+             <div className="col-span-1 row-span-1 relative rounded-md overflow-hidden">
+              <img src={genres[3].image} alt={genres[0].name} className="w-full h-full p-2 object-cover" />
+              <div className="absolute inset-0 bg-opacity-30 flex items-center justify-center">
+              </div>
+            </div>
+
+           {/* added a new page here  */}
+          <div className="col-span-1 row-span-1 relative rounded-md overflow-hidden">
+              <img src={genres[3].image} alt={genres[0].name} className="w-full h-full p-2 object-cover" />
+              <div className="absolute inset-0 bg-opacity-30 flex items-center justify-center">
+              </div>
+            </div>
+
+            {/* Classical */}
+            <div className="col-span-1 row-span-1 relative rounded-md overflow-hidden">
+              <img src={genres[4].image} alt={genres[4].name} className="w-full h-full object-cover" />
+              <div className="absolute inset-0  bg-opacity-30 flex items-center justify-center">
+               
+              </div>
+            </div>
+
+            {/* Afrobeat */}
+            <div className="col-span-1 row-span-2 relative rounded-md overflow-hidden">
+              <img src={genres[5].image} alt={genres[5].name} className="w-full h-full object-cover" />
+              <div className="absolute inset-0  bg-opacity-30 flex items-center justify-center">
+              
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
 };
 
-export default Genre;
+export default Genre

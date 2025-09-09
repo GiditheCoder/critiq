@@ -8,6 +8,7 @@ const Role = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [loaded, setLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // For fullscreen loader
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,8 +18,21 @@ const Role = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSelectScreen = () => {
-    navigate('/select-vibe');
+  // Handler for "listener" button
+  const handleListenerSelect = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      navigate('/signup');
+    }, 1000);
+  };
+
+  // Handler for "artist" button (if you want to navigate somewhere)
+  const handleArtistSelect = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      // Replace with your desired route for artist
+      navigate('/artiste-signup'); 
+    }, 1000);
   };
 
   return (
@@ -92,12 +106,17 @@ const Role = () => {
               </h2>
               <p className="text-lg sm:text-xl font-semibold mb-6">I am</p>
               <div className="flex flex-col space-y-4 w-full">
-                <button className="border border-purple-500 text-white text-base sm:text-lg px-6 py-3 sm:px-10 sm:py-4 rounded-full w-full transition-colors duration-300 ease-in-out">
+                <button
+                  onClick={handleArtistSelect}
+                  disabled={isLoading}
+                  className="border border-purple-500 text-white text-base sm:text-lg px-6 py-3 sm:px-10 sm:py-4 rounded-full w-full transition-colors duration-300 ease-in-out disabled:opacity-60"
+                >
                   an artist
                 </button>
                 <button
-                  onClick={handleSelectScreen}
-                  className="bg-purple-500 text-white text-base sm:text-lg font-bold px-6 py-3 sm:px-10 sm:py-4 rounded-full w-full hover:bg-[#E2CCFF] hover:text-[#A259FF] transition-colors duration-300 ease-in-out"
+                  onClick={handleListenerSelect}
+                  disabled={isLoading}
+                  className="bg-purple-500 text-white text-base sm:text-lg font-bold px-6 py-3 sm:px-10 sm:py-4 rounded-full w-full hover:bg-[#E2CCFF] hover:text-[#A259FF] transition-colors duration-300 ease-in-out disabled:opacity-60"
                 >
                   a listener
                 </button>
@@ -106,6 +125,32 @@ const Role = () => {
           )}
         </div>
       </div>
+
+      {/* Fullscreen Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+          <svg
+            className="animate-spin h-16 w-16 text-[#A259FF]"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            ></path>
+          </svg>
+        </div>
+      )}
     </div>
   );
 };

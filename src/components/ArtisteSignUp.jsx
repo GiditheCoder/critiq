@@ -3,6 +3,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useNavigate } from 'react-router-dom';
 import { useSignUp } from "@clerk/clerk-react";
+
 import critiqLogo from '../images/critiq-logo.png';
 import SignupImg from '../images/signup.png';
 import GoogleImg from '../images/google.png';
@@ -11,16 +12,17 @@ import inquiryImg from '../images/inquiry.png';
 import eyeIcon from '../images/eyeIcon.png';
 import VerifyEmailScreen from './VerifyEmailScreen';
 
-const Signup = () => {
+const ArtisteSignUp = () => {
   const navigate = useNavigate();
   const { signUp, isLoaded } = useSignUp();
+
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(true); // for skeletons
-  const [loaded, setLoaded] = useState(false); // for fade-in
-  const [signingUp, setSigningUp] = useState(false); // full-screen overlay
+  const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
+  const [signingUp, setSigningUp] = useState(false);
   const [pendingVerification, setPendingVerification] = useState(false);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const Signup = () => {
   }, []);
 
   const handleSigninScreen = () => {
-    navigate('/signin');
+    navigate('/artiste-signin');
   };
 
   const handleSignUp = async () => {
@@ -85,7 +87,7 @@ const Signup = () => {
             <Skeleton height={30} width={250} baseColor="#A259FF" highlightColor="#E2CCFF" style={{ opacity: 0.2 }} className="mx-auto" />
           ) : (
             <h2 className={`text-2xl font-semibold text-white text-center transition-opacity duration-700 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}>
-              Create an account
+              Artiste Sign Up
             </h2>
           )}
 
@@ -93,7 +95,7 @@ const Signup = () => {
             <Skeleton height={20} width={300} baseColor="#A259FF" highlightColor="#E2CCFF" style={{ opacity: 0.2 }} className="mx-auto my-4" />
           ) : (
             <p className={`text-1xl text-gray-400 text-center mb-6 transition-opacity duration-700 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}>
-              Enter your details to create an account
+              Enter your details to sign up as an artiste
             </p>
           )}
 
@@ -168,7 +170,7 @@ const Signup = () => {
               disabled={signingUp || !isLoaded}
               className={`w-full bg-[#A259FF] text-white py-3 rounded-3xl font-semibold hover:bg-[#9446f5] transition disabled:opacity-50 ${loaded ? 'opacity-100' : 'opacity-0'}`}
             >
-              {signingUp ? "Signing up..." : "Sign up"}
+              {signingUp ? "Signing up..." : "Sign Up"}
             </button>
           )}
 
@@ -205,7 +207,7 @@ const Signup = () => {
       {/* Right Side Image */}
       <div className="hidden md:block md:w-1/2 h-screen">
         {loading ? (
-          <Skeleton height="100%" width="100%" baseColor="#0b0b12"  style={{ opacity: 1 }} />
+          <Skeleton height="100%" width="100%" baseColor="#0b0b12" style={{ opacity: 1 }} />
         ) : (
           <img src={SignupImg} alt="Signup Visual" className="w-full h-full object-cover" />
         )}
@@ -214,4 +216,5 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default ArtisteSignUp;
+

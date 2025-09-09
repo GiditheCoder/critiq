@@ -81,13 +81,12 @@ const TopVote = () => {
 
           {/* Background Image */}
           <div
-            className="h-128 w-full bg-cover bg-center relative"
-            style={{
-              backgroundImage: `url(${davidoImg})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          >
+  className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-cover bg-center relative"
+  style={{
+    backgroundImage: `url(${davidoImg})`,
+  }}
+>
+
             {/* Overlay Content */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">

@@ -4,6 +4,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import critiqLogo from '../images/critiq-logo.png';
 import notificationIcon from '../images/notificationIcon.png';
 import searchIcon from '../images/searchIcon.png';
+import menuIcon from '../images/menuIcon2.png';
 
 const Header = () => {
   const [loading, setLoading] = useState(true);
@@ -19,7 +20,13 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="w-full pl-20 bg-[#0B0A1F] text-white flex items-center justify-between px-14 py-13 fixed top-0 left-0 z-40 h-[72px]">
+    <header className="w-full bg-[#0B0A1F] text-white fixed top-0 left-0 z-40 h-[72px] flex items-center justify-between px-6 md:px-14 py-4">
+      
+      {/* Mobile Menu Icon */}
+      <div className="md:hidden flex items-center">
+        <img src={menuIcon} alt="Menu" className="w-6 h-6" />
+      </div>
+
       {/* Logo */}
       <div className="flex items-center gap-2">
         {loading ? (
@@ -42,57 +49,55 @@ const Header = () => {
       </div>
 
       {/* Navigation Links */}
-      <div className="flex items-center justify-center gap-8 text-[20px] font-normal">
+      <nav className="hidden md:flex items-center justify-center gap-8 text-[16px] font-normal">
         {loading ? (
           <>
-            <Skeleton width={100} height={20} baseColor="#A259FF" highlightColor="#E2CCFF"  style={{ opacity: 0.2 }} />
-            <Skeleton width={140} height={20} baseColor="#A259FF" highlightColor="#E2CCFF"  style={{ opacity: 0.2 }}  />
-            <Skeleton width={160} height={20} baseColor="#A259FF" highlightColor="#E2CCFF"  style={{ opacity: 0.2 }}  />
-            <Skeleton width={120} height={20} baseColor="#A259FF" highlightColor="#E2CCFF"  style={{ opacity: 0.2 }} />
+            <Skeleton width={80} height={20} baseColor="#A259FF" highlightColor="#E2CCFF" style={{ opacity: 0.2 }} />
+            <Skeleton width={100} height={20} baseColor="#A259FF" highlightColor="#E2CCFF" style={{ opacity: 0.2 }} />
+            <Skeleton width={120} height={20} baseColor="#A259FF" highlightColor="#E2CCFF" style={{ opacity: 0.2 }} />
+            <Skeleton width={100} height={20} baseColor="#A259FF" highlightColor="#E2CCFF" style={{ opacity: 0.2 }} />
           </>
         ) : (
-          <>
-            {['TRENDING', 'RECOMMENDED', 'NEW RELEASED', 'TOP CHARTS'].map((item) => (
-              <button
-                key={item}
-                className={`hover:text-purple-400 transition duration-200 ${
-                  loaded ? 'opacity-100' : 'opacity-0'
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-          </>
+          ['TRENDING', 'RECOMMENDED', 'NEW RELEASED', 'TOP CHARTS'].map((item) => (
+            <button
+              key={item}
+              className={`hover:text-purple-400 transition duration-200 ${
+                loaded ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              {item}
+            </button>
+          ))
         )}
-      </div>
+      </nav>
 
       {/* Icons */}
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4 md:gap-6">
         {loading ? (
           <>
-            <Skeleton circle width={32} height={32} baseColor="#A259FF" highlightColor="#E2CCFF"  style={{ opacity: 0.2 }} />
-            <Skeleton circle width={32} height={32} baseColor="#A259FF" highlightColor="#E2CCFF"  style={{ opacity: 0.2 }} />
+            <Skeleton circle width={32} height={32} baseColor="#A259FF" highlightColor="#E2CCFF" style={{ opacity: 0.2 }} />
+            <Skeleton circle width={32} height={32} baseColor="#A259FF" highlightColor="#E2CCFF" style={{ opacity: 0.2 }} />
           </>
         ) : (
           <>
             <img
               src={searchIcon}
               alt="Search"
-              className={`w-8 h-8 cursor-pointer transition-opacity duration-700 ${
+              className={`w-6 h-6 md:w-8 md:h-8 cursor-pointer transition-opacity duration-700 ${
                 loaded ? 'opacity-100' : 'opacity-0'
               }`}
             />
             <img
               src={notificationIcon}
               alt="Notifications"
-              className={`w-8 h-8 cursor-pointer transition-opacity duration-700 ${
+              className={`w-6 h-6 md:w-8 md:h-8 cursor-pointer transition-opacity duration-700 ${
                 loaded ? 'opacity-100' : 'opacity-0'
               }`}
             />
           </>
         )}
       </div>
-    </div>
+    </header>
   );
 };
 

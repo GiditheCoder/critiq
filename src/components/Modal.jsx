@@ -19,10 +19,6 @@ const Modal = ({ className = '' }) => {
 
   const navigate = useNavigate();
 
-  const handleScreen = () => {
-    navigate('');
-  };
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);

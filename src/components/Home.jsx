@@ -11,12 +11,12 @@ import Modal from './Modal';
 
 const HomeScreen = () => {
   return (
-    <div className="flex ">
-      {/* Sidebar */}
-      <Modal className="z-50 p-13 "  />
+    <div className="flex">
+      {/* Sidebar - Hidden on mobile and tablet, visible on desktop */}
+      <Modal className="z-50 p-2 hidden lg:block" />
 
-      {/* Main content with left padding to accommodate the sidebar */}
-      <div className="flex-1 pl-20  ">
+      {/* Main content with responsive left padding */}
+      <div className="flex-1 pl-0 lg:pl-20">
         <Header />
         <Hero />
         <FeaturedArtiste />

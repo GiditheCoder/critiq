@@ -7,29 +7,28 @@ import { useNavigate } from 'react-router-dom';
 const OnboardingScreen = () => {
   const navigate = useNavigate();
 
-  // we have 2 states, l loading and other loaded 
-  // we set the laoading to the true
-  // and we set the loaded to false initially 
   const [loading, setLoading] = useState(true);
   const [loaded, setLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-
-// we set the useEffect to setLoading to false and setLoaded to true and this hapens all in 1000 sec
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
       setLoaded(true);
     }, 1000);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
   const handleRoleScreen = () => {
-    navigate('/role');
+    setIsLoading(true);
+    setTimeout(() => {
+      navigate('/role');
+    }, 1000);
   };
 
   return (
-    <div className="min-h-screen bg-[#0F0F1C] flex flex-col items-center justify-center px-4 sm:px-8">
+    <div className="min-h-screen bg-[#0F0F1C] flex flex-col items-center justify-center px-4 sm:px-8 relative">
       {/* Logo Section */}
       <div className="mb-12 sm:mb-16 lg:mb-20">
         {loading ? (
@@ -102,15 +101,41 @@ const OnboardingScreen = () => {
           borderRadius={9999}
         />
       ) : (
-        // transition colors
         <button
-          className={`bg-[#A259FF] hover:bg-[#E2CCFF] text-white hover:text-[#A259FF] font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg  duration-300 ease-in-out shadow-lg mt-4 mb-3 cursor-pointer transition-opacity ${
+          className={`bg-[#A259FF] hover:bg-[#E2CCFF] text-white hover:text-[#A259FF] font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg duration-300 ease-in-out shadow-lg mt-4 mb-3 cursor-pointer transition-opacity flex items-center justify-center ${
             loaded ? 'opacity-100' : 'opacity-0'
           }`}
           onClick={handleRoleScreen}
+          disabled={isLoading}
         >
           Get Started
         </button>
+      )}
+
+      {/* Fullscreen Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+          <svg
+            className="animate-spin h-16 w-16 text-[#A259FF]"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            ></path>
+          </svg>
+        </div>
       )}
     </div>
   );

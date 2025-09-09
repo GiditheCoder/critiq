@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSignIn, useAuth } from '@clerk/clerk-react';
 import { useNavigate } from 'react-router-dom';
+
 import critiqLogo from '../images/critiq-logo.png';
 import GoogleImg from '../images/google.png';
 import lockIcon from '../images/lock.png';
@@ -8,21 +9,21 @@ import inquiryImg from '../images/inquiry.png';
 import eyeIcon from '../images/eyeIcon.png';
 import signin from '../images/signin.png';
 
-const Signin = () => {
+const ArtisteSignIn = () => {
   const navigate = useNavigate();
   const { isSignedIn } = useAuth();
   const { signIn, setActive, isLoaded: signInLoaded } = useSignIn();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSelectScreen = () => {
-    navigate('/signup');
+    navigate('/artiste-signup');
   };
 
   const handleSignIn = async () => {
-    // this works correctly
     if (!email || !password) {
       alert('Error: Please fill in all fields');
       return;
@@ -30,7 +31,7 @@ const Signin = () => {
 
     if (isSignedIn) {
       alert('You are already signed in');
-      navigate('/works', { replace: true });
+      navigate('/artist-route', { replace: true });
       return;
     }
 
@@ -74,7 +75,6 @@ const Signin = () => {
     }
   };
 
-  // to handle google sign in
   const handleGoogleSignIn = async () => {
     if (isSignedIn) {
       alert('You are already signed in');
@@ -101,7 +101,7 @@ const Signin = () => {
     <div className="flex min-h-screen font-sans">
       {/* Left Side Image */}
       <div className="hidden md:block md:w-1/2 h-screen">
-        <img src={signin} alt="Signin Visual" className="w-full h-full object-cover" />
+        <img src={signin} alt="Artiste Signin Visual" className="w-full h-full object-cover" />
       </div>
 
       {/* Right Side */}
@@ -114,10 +114,10 @@ const Signin = () => {
 
           {/* Heading */}
           <h2 className="text-2xl font-semibold text-white text-center mb-1">
-            Sign in to your account
+            Artiste Sign In
           </h2>
           <p className="text-sm text-gray-400 text-center mb-6">
-            Welcome back! Enter your details
+            Welcome back artiste! Enter your details
           </p>
 
           {/* Email */}
@@ -158,9 +158,6 @@ const Signin = () => {
                 className="w-4 h-4 opacity-70 cursor-pointer"
               />
             </div>
-            <p className="text-xs text-gray-400 mt-1">
-              12 characters min. Use upper case, lower case, number and symbol
-            </p>
           </div>
 
           {/* Remember Me / Forgot Password */}
@@ -192,7 +189,7 @@ const Signin = () => {
 
           {/* Sign Up Link */}
           <p className="text-sm text-gray-400 text-center mt-6">
-            Don’t have an account?{' '}
+            Don’t have an artiste account?{' '}
             <span
               onClick={handleSelectScreen}
               className="text-white font-medium cursor-pointer hover:underline"
@@ -206,4 +203,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default ArtisteSignIn;
